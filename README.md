@@ -56,9 +56,9 @@ Before setting up the MCP server, you need three key pieces of information:
 
 This is your authentication token for Keboola:
 
-For instructions on how to create and manage Storage API tokens, refer to the [official Keboola documentation](https://help.keboola.com/management/project/tokens/).
+For instructions on how to create and manage Keboola API tokens, refer to the [official Keboola documentation](https://help.keboola.com/management/project/tokens/).
 
-**Note**: If you want the MCP server to have limited access, use custom storage token, if you want the MCP to access everything in your project, use the master token.
+**Note**: If you want the MCP server to have limited access, create an API token with limited permissions. If you want the MCP to access everything in your project, use the master token having full permissions.
 
 ### KBC_WORKSPACE_SCHEMA
 
@@ -117,7 +117,7 @@ In this mode, Claude or Cursor automatically starts the MCP server for you. **Yo
         "--api-url", "https://connection.YOUR_REGION.keboola.com"
       ],
       "env": {
-        "KBC_STORAGE_TOKEN": "your_keboola_storage_token",
+        "KBC_STORAGE_TOKEN": "your_keboola_api_token",
         "KBC_WORKSPACE_SCHEMA": "your_workspace_schema"
       }
     }
@@ -149,7 +149,7 @@ Config file locations:
         "--api-url", "https://connection.YOUR_REGION.keboola.com"
       ],
       "env": {
-        "KBC_STORAGE_TOKEN": "your_keboola_storage_token",
+        "KBC_STORAGE_TOKEN": "your_keboola_api_token",
         "KBC_WORKSPACE_SCHEMA": "your_workspace_schema"
       }
     }
@@ -184,7 +184,7 @@ When running the MCP server from Windows Subsystem for Linux with Cursor AI, use
 Where `/wsl_path/to/keboola-mcp-server/.env` file contains environment variables:
 
 ```bash
-export KBC_STORAGE_TOKEN="your_keboola_storage_token"
+export KBC_STORAGE_TOKEN="your_keboola_api_token"
 export KBC_WORKSPACE_SCHEMA="your_workspace_schema"
 ```
 
@@ -206,7 +206,7 @@ For developers working on the MCP server code itself:
         "--api-url", "https://connection.YOUR_REGION.keboola.com"
       ],
       "env": {
-        "KBC_STORAGE_TOKEN": "your_keboola_storage_token",
+        "KBC_STORAGE_TOKEN": "your_keboola_api_token",
         "KBC_WORKSPACE_SCHEMA": "your_workspace_schema",
 
       }
@@ -224,7 +224,7 @@ You can run the server manually in a terminal for testing or debugging:
 
 ```bash
 # Set environment variables
-export KBC_STORAGE_TOKEN=your_keboola_storage_token
+export KBC_STORAGE_TOKEN=your_keboola_api_token
 export KBC_WORKSPACE_SCHEMA=your_workspace_schema
 # For BigQuery users
 # export GOOGLE_APPLICATION_CREDENTIALS=/full/path/to/credentials.json
@@ -245,14 +245,14 @@ docker pull keboola/mcp-server:latest
 
 # For Snowflake users
 docker run -it \
-  -e KBC_STORAGE_TOKEN="YOUR_KEBOOLA_STORAGE_TOKEN" \
+  -e KBC_STORAGE_TOKEN="YOUR_KEBOOLA_API_TOKEN" \
   -e KBC_WORKSPACE_SCHEMA="YOUR_WORKSPACE_SCHEMA" \
   keboola/mcp-server:latest \
   --api-url https://connection.YOUR_REGION.keboola.com
 
 # For BigQuery users (add credentials volume mount)
 # docker run -it \
-#   -e KBC_STORAGE_TOKEN="YOUR_KEBOOLA_STORAGE_TOKEN" \
+#   -e KBC_STORAGE_TOKEN="YOUR_KEBOOLA_API_TOKEN" \
 #   -e KBC_WORKSPACE_SCHEMA="YOUR_WORKSPACE_SCHEMA" \
 #   -e GOOGLE_APPLICATION_CREDENTIALS="/creds/credentials.json" \
 #   -v /local/path/to/credentials.json:/creds/credentials.json \
